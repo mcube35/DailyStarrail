@@ -6,9 +6,7 @@ on:
   workflow_dispatch:      # 수동 실행도 허용
 
 env:
-  LTUID_V2: ${{ secrets.LTUID_V2 }}
-  LTMID_V2: ${{ secrets.LTMID_V2 }}
-  LTOKEN_V2: ${{ secrets.LTOKEN_V2 }}
+  COOKIE_TOKEN: ${{ secrets.COOKIE_TOKEN }}
   UID: ${{ secrets.UID }}
 
 jobs:
