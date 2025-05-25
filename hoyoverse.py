@@ -36,6 +36,7 @@ class Hoyoverse:
                 }),
             )
             print(res.text)
+            time.sleep(5)
 
 
     def use_redeem_by_wiki(self, uid:str, cookie_token: dict):
