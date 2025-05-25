@@ -3,6 +3,7 @@ import json
 import time
 import mweb
 import os
+from dotenv import load_dotenv
 
 class Hoyoverse:
     def __init__(self):
@@ -12,14 +13,14 @@ class Hoyoverse:
         res = self.session.post(
             url = "https://public-operation-hkrpg.hoyoverse.com/common/apicdkey/api/webExchangeCdkeyRisk",
             cookies = cookie_token,
-            data = json.dumps({
+            json = {
                 "lang":"ko",
                 "game_biz":"hkrpg_global",
                 "uid": uid,
                 "region":"prod_official_asia",
                 "cdkey": redeem,
                 "platform":"4",
-            }),
+            },
         )
         return res
 
@@ -30,10 +31,10 @@ class Hoyoverse:
             res = self.session.post(
                 url = url,
                 cookies = cookie_token,
-                data = json.dumps({
+                json = {
                     "lang":"ko",
                     "act_id":"e202303301540311"
-                }),
+                },
             )
             print(res.text)
             time.sleep(5)
@@ -65,7 +66,17 @@ class Hoyoverse:
 
 if __name__ == "__main__":
     hoyoverse = Hoyoverse()
-    cookie_token = json.loads(os.getenv("COOKIE_TOKEN"))
 
-    hoyoverse.use_redeem_by_wiki(uid=os.getenv("UID"), cookie_token=cookie_token)
+    load_dotenv()
+
+    uid = os.getenv("UID")
+    cookie_token_v2 = os.getenv("COOKIE_TOKEN_V2")
+    account_id_v2 = os.getenv("ACCOUNT_ID_V2")
+    
+    cookie_token = {
+        "cookie_token_v2": cookie_token_v2,
+        "account_id_v2": account_id_v2,
+    }
+
+    hoyoverse.use_redeem_by_wiki(uid, cookie_token)
     hoyoverse.daily_check(cookie_token)
