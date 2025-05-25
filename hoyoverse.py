@@ -58,10 +58,6 @@ class Hoyoverse:
                 continue
 
             print(f"{redeem} => {data}")
-
-            if data["message"] == "이미 사용된 리딤코드입니다":
-                append_used_redeem(redeem)
-
             time.sleep(5)
     
 
