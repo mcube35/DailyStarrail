@@ -1,0 +1,33 @@
+name: Auto Run Hoyoverse Script Daily
+
+on:
+  schedule:
+    - cron: '10 16 * * *'  # 한국 01:10 → UTC 16:10 (전날)
+  workflow_dispatch:      # 수동 실행도 허용
+
+env:
+  LTUID_V2: ${{ secrets.LTUID_V2 }}
+  LTMID_V2: ${{ secrets.LTMID_V2 }}
+  LTOKEN_V2: ${{ secrets.LTOKEN_V2 }}
+  UID: ${{ secrets.UID }}
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run hoyoverse.py
+        run: python hoyoverse.py
