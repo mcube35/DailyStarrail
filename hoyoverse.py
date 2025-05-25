@@ -25,15 +25,17 @@ class Hoyoverse:
 
 
     def daily_check(self, cookie_token: dict):
-        res = self.session.post(
-            url = "https://sg-public-api.hoyolab.com/event/luna/hkrpg/os/resign",
-            cookies = cookie_token,
-            data = json.dumps({
-                "lang":"ko",
-                "act_id":"e202303301540311"
-            }),
-        )
-        print(res.text)
+        url_list = ["https://sg-public-api.hoyolab.com/event/luna/hkrpg/os/sign", "https://sg-public-api.hoyolab.com/event/luna/hkrpg/os/resign"]
+        for url in url_list:
+            res = self.session.post(
+                url = url,
+                cookies = cookie_token,
+                data = json.dumps({
+                    "lang":"ko",
+                    "act_id":"e202303301540311"
+                }),
+            )
+            print(res.text)
 
 
     def use_redeem_by_wiki(self, uid:str, cookie_token: dict):
