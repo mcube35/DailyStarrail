@@ -67,8 +67,6 @@ class Hoyoverse:
 if __name__ == "__main__":
     hoyoverse = Hoyoverse()
 
-    load_dotenv()
-
     uid = os.getenv("UID")
     cookie_token_v2 = os.getenv("COOKIE_TOKEN_V2")
     account_id_v2 = os.getenv("ACCOUNT_ID_V2")
